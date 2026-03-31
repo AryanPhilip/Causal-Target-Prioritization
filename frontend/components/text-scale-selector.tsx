@@ -50,15 +50,14 @@ export function TextScaleSelector() {
   ];
 
   return (
-    <div
-      className="flex flex-col gap-1.5"
-      role="group"
-      aria-label="Text size for the whole app"
-    >
+    <div className="flex flex-col gap-1.5" role="group" aria-label="Text size for the whole app">
       <span className="text-[0.65rem] font-semibold uppercase tracking-[0.12em] text-fg-subtle">
         Text size
       </span>
-      <div className="inline-flex flex-wrap rounded-full border border-border bg-bg-muted/80 p-0.5 shadow-sm">
+      <div
+        className="inline-flex flex-wrap overflow-hidden border border-border-strong bg-bg-elevated shadow-[var(--shadow-tight)]"
+        role="presentation"
+      >
         {options.map((o) => (
           <button
             key={o.id}
@@ -67,10 +66,10 @@ export function TextScaleSelector() {
             aria-pressed={scale === o.id}
             aria-label={`${o.label} text. ${o.hint}`}
             onClick={() => apply(o.id)}
-            className={`rounded-full px-2 py-1.5 text-xs font-semibold transition sm:px-2.5 ${
+            className={`border-r border-border last:border-r-0 px-2 py-1.5 text-[0.7rem] font-semibold uppercase tracking-[0.08em] transition-[color,background-color] duration-[420ms] ease-[cubic-bezier(0.22,1,0.36,1)] sm:px-2.5 ${
               scale === o.id
-                ? "bg-bg-elevated text-fg shadow-sm ring-1 ring-border-strong"
-                : "text-fg-muted hover:text-fg"
+                ? "bg-accent-muted text-accent"
+                : "text-fg-muted hover:bg-bg-muted hover:text-fg"
             }`}
           >
             {o.label}

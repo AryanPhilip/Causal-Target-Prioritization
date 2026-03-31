@@ -21,6 +21,9 @@ type PageShellProps = {
   copyActions?: Array<{ label: string; value: string }>;
 };
 
+const navLink =
+  "border border-transparent px-2 py-1.5 text-[0.75rem] font-semibold uppercase tracking-[0.14em] text-fg-muted transition-[color,border-color,background-color] duration-[420ms] ease-[cubic-bezier(0.22,1,0.36,1)] hover:border-border hover:bg-bg-elevated hover:text-fg focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring";
+
 export function PageShell({
   title,
   eyebrow,
@@ -31,13 +34,13 @@ export function PageShell({
 }: PageShellProps) {
   return (
     <div className="min-h-screen flex flex-col">
-      <header className="sticky top-0 z-20 border-b border-border bg-bg/90 backdrop-blur-md">
+      <header className="sticky top-0 z-20 border-b border-border bg-bg/92 backdrop-blur-md">
         <div className="mx-auto flex max-w-6xl flex-col gap-4 px-5 py-4 md:px-8">
           <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
             <div className="flex min-w-0 flex-wrap items-baseline gap-3">
               <Link
                 href="/"
-                className="font-display text-base font-semibold tracking-tight text-fg md:text-lg"
+                className="border-l-4 border-accent pl-3 font-display text-base font-bold tracking-tight text-fg md:text-lg"
               >
                 CTPC
               </Link>
@@ -49,29 +52,17 @@ export function PageShell({
               </span>
             </div>
             <div className="flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-start sm:gap-6">
-              <nav aria-label="Primary" className="flex flex-wrap gap-2">
-                <Link
-                  href="/"
-                  className="rounded-full border border-transparent px-3 py-1.5 text-sm font-medium text-fg-muted transition hover:border-border hover:bg-bg-elevated hover:text-fg"
-                >
+              <nav aria-label="Primary" className="flex flex-wrap gap-1">
+                <Link href="/" className={navLink}>
                   Home
                 </Link>
-                <Link
-                  href={diseaseHref(DEFAULT_DISEASE_ID)}
-                  className="rounded-full border border-transparent px-3 py-1.5 text-sm font-medium text-fg-muted transition hover:border-border hover:bg-bg-elevated hover:text-fg"
-                >
+                <Link href={diseaseHref(DEFAULT_DISEASE_ID)} className={navLink}>
                   Workspace
                 </Link>
-                <Link
-                  href={compareHref(DEFAULT_DISEASE_ID)}
-                  className="rounded-full border border-transparent px-3 py-1.5 text-sm font-medium text-fg-muted transition hover:border-border hover:bg-bg-elevated hover:text-fg"
-                >
+                <Link href={compareHref(DEFAULT_DISEASE_ID)} className={navLink}>
                   Compare
                 </Link>
-                <Link
-                  href="/admin/status"
-                  className="rounded-full border border-transparent px-3 py-1.5 text-sm font-medium text-fg-muted transition hover:border-border hover:bg-bg-elevated hover:text-fg"
-                >
+                <Link href="/admin/status" className={navLink}>
                   Admin
                 </Link>
               </nav>
@@ -95,8 +86,11 @@ export function PageShell({
           </div>
         ) : null}
         <div className="mb-8 border-b border-border pb-8">
-          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">CTPC</p>
-          <h1 className="mt-2 font-display text-3xl font-semibold tracking-tight text-fg md:text-4xl">
+          <div className="flex items-center gap-3">
+            <span className="h-0.5 w-10 shrink-0 bg-accent" aria-hidden />
+            <p className="text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-accent">CTPC</p>
+          </div>
+          <h1 className="mt-4 font-display text-3xl font-bold tracking-tight text-fg md:text-4xl">
             {title}
           </h1>
           {eyebrow ? (

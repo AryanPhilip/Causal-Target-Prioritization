@@ -45,11 +45,11 @@ export default async function DiseaseWorkspacePage({
 
       <TargetRankingTable diseaseId={id} items={rankedTargets} />
 
-      <section className="mt-8 rounded-[var(--radius-lg)] border border-border bg-bg-muted/50 p-6 md:p-8">
-        <h2 className="font-display text-lg font-semibold text-fg">Suggested comparison</h2>
+      <section className="mt-8 border border-border bg-bg-muted/50 p-6 md:p-8">
+        <h2 className="font-display text-lg font-bold text-fg">Suggested comparison</h2>
         <p className="mt-2 text-sm text-fg-muted">Open the first two targets in side-by-side mode.</p>
         <Link
-          className="mt-5 inline-flex rounded-full border border-accent bg-accent px-5 py-2.5 text-sm font-semibold text-accent-fg transition hover:opacity-90"
+          className="ds-link-cta ds-link-cta--primary mt-5 inline-flex normal-case tracking-normal"
           href={compareHref(
             id,
             rankedTargets.slice(0, 2).map((item) => item.targetId)

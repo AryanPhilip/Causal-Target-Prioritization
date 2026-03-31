@@ -35,6 +35,9 @@ export function KeyboardShortcutsDialog() {
     return null;
   }
 
+  const kbd =
+    "shrink-0 rounded-[var(--radius-lg)] border border-border-strong bg-bg-muted px-2 py-1 font-mono text-xs text-fg shadow-[var(--shadow-tight)]";
+
   return (
     <div
       className="fixed inset-0 z-[100] flex items-end justify-center p-4 sm:items-center"
@@ -42,7 +45,7 @@ export function KeyboardShortcutsDialog() {
     >
       <button
         type="button"
-        className="absolute inset-0 bg-bg/80 backdrop-blur-sm"
+        className="absolute inset-0 bg-bg/85 backdrop-blur-sm"
         aria-label="Close shortcuts"
         onClick={close}
       />
@@ -50,27 +53,22 @@ export function KeyboardShortcutsDialog() {
         role="dialog"
         aria-modal="true"
         aria-labelledby="kbd-title"
-        className="relative z-[101] w-full max-w-md rounded-2xl border border-border bg-bg-elevated p-6 shadow-[var(--shadow-elevated)]"
+        className="ds-panel relative z-[101] w-full max-w-md border-border-strong p-6"
       >
-        <h2 id="kbd-title" className="font-display text-lg font-semibold text-fg">
+        <h2 id="kbd-title" className="font-display text-lg font-bold text-fg">
           Keyboard shortcuts
         </h2>
         <p className="mt-2 text-sm text-fg-muted">
-          Press <kbd className="rounded border border-border bg-bg-muted px-1.5 py-0.5 font-mono text-xs">?</kbd>{" "}
-          anywhere (outside text fields) to toggle this panel.
+          Press <kbd className={kbd}>?</kbd> anywhere (outside text fields) to toggle this panel.
         </p>
         <ul className="mt-4 space-y-3 text-sm text-fg">
           <li className="flex justify-between gap-4 border-b border-border pb-2">
             <span className="text-fg-muted">Toggle this help</span>
-            <kbd className="shrink-0 rounded border border-border bg-bg-muted px-2 py-1 font-mono text-xs">
-              ?
-            </kbd>
+            <kbd className={kbd}>?</kbd>
           </li>
           <li className="flex justify-between gap-4 border-b border-border pb-2">
             <span className="text-fg-muted">Close dialog</span>
-            <kbd className="shrink-0 rounded border border-border bg-bg-muted px-2 py-1 font-mono text-xs">
-              Esc
-            </kbd>
+            <kbd className={kbd}>Esc</kbd>
           </li>
           <li className="flex justify-between gap-4">
             <span className="text-fg-muted">Dismiss (click backdrop)</span>
@@ -80,7 +78,7 @@ export function KeyboardShortcutsDialog() {
         <button
           type="button"
           onClick={close}
-          className="mt-6 w-full rounded-full border border-border bg-bg-muted py-2.5 text-sm font-semibold text-fg transition hover:border-accent hover:text-accent"
+          className="ds-link-cta mt-6 w-full border-border-strong py-2.5 text-sm normal-case tracking-normal"
         >
           Close
         </button>

@@ -24,9 +24,12 @@ export default async function HomePage() {
       eyebrow="A scientist-facing workspace that unifies biomedical evidence and ranks therapeutic hypotheses with an explainable causal profile—starting with an ulcerative colitis vertical."
     >
       <section className="mb-10 grid gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:items-start">
-        <div className="rounded-[var(--radius-lg)] border border-border bg-bg-elevated p-6 shadow-[var(--shadow-elevated)] md:p-8">
-          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">Query workspace</p>
-          <h2 className="mt-3 font-display text-2xl font-semibold tracking-tight text-fg md:text-3xl">
+        <div className="ds-panel border-border-strong p-6 md:p-8">
+          <div className="flex items-center gap-3">
+            <span className="h-0.5 w-8 shrink-0 bg-accent" aria-hidden />
+            <p className="text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-accent">Query workspace</p>
+          </div>
+          <h2 className="mt-4 font-display text-2xl font-bold tracking-tight text-fg md:text-3xl">
             Ulcerative colitis target prioritization
           </h2>
           <p className="mt-4 text-sm leading-relaxed text-fg-muted md:text-base">
@@ -39,13 +42,13 @@ export default async function HomePage() {
             </label>
             <input
               id="home-disease-query"
-              className="min-w-0 flex-1 rounded-2xl border border-border bg-bg-muted px-4 py-3 font-mono text-sm text-fg tabular-nums outline-none ring-ring/0 transition focus:border-accent focus:ring-2 focus:ring-ring"
+              className="min-w-0 flex-1 rounded-[var(--radius-lg)] border border-border-strong bg-bg-muted px-4 py-3 font-mono text-sm text-fg tabular-nums shadow-[var(--shadow-tight)] outline-none ring-ring/0 transition-[border-color,box-shadow] duration-[420ms] ease-[cubic-bezier(0.22,1,0.36,1)] focus:border-accent focus:ring-2 focus:ring-ring"
               defaultValue="ulcerative colitis"
               readOnly
               aria-readonly
             />
             <Link
-              className="inline-flex justify-center rounded-full border border-accent bg-accent px-6 py-3 text-sm font-semibold text-accent-fg shadow-sm transition hover:opacity-90"
+              className="ds-link-cta ds-link-cta--primary shrink-0 px-6 py-3 text-sm normal-case tracking-normal"
               href={diseaseHref(workspaceDiseaseId)}
             >
               Open workspace

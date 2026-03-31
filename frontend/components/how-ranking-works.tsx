@@ -1,7 +1,7 @@
 export function HowRankingWorks() {
   return (
-    <details className="group rounded-2xl border border-border bg-bg-muted/40 open:bg-bg-elevated">
-      <summary className="cursor-pointer list-none px-4 py-3 text-sm font-medium text-accent marker:content-none [&::-webkit-details-marker]:hidden">
+    <details className="group border border-border bg-bg-muted/40 open:bg-bg-elevated">
+      <summary className="cursor-pointer list-none px-4 py-3 text-sm font-semibold text-accent marker:content-none [&::-webkit-details-marker]:hidden">
         <span className="inline-flex items-center gap-2">
           <span aria-hidden className="inline-block transition group-open:rotate-90">
             ▸

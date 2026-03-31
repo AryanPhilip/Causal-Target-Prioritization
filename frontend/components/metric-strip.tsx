@@ -10,12 +10,11 @@ export function MetricStrip({ items, stacked, className = "mb-8" }: MetricStripP
   return (
     <div className={`grid gap-4 ${grid} ${className}`}>
       {items.map((item) => (
-        <article
-          key={item.label}
-          className="rounded-2xl border border-border bg-bg-elevated p-5 shadow-[var(--shadow-elevated)]"
-        >
-          <span className="text-xs font-medium uppercase tracking-wide text-fg-muted">{item.label}</span>
-          <strong className="mt-2 block font-display text-2xl font-semibold tabular-nums text-fg">
+        <article key={item.label} className="ds-panel border-border-strong p-5">
+          <span className="text-xs font-semibold uppercase tracking-[0.1em] text-fg-muted">
+            {item.label}
+          </span>
+          <strong className="mt-2 block font-display text-2xl font-bold tabular-nums text-fg">
             {item.value}
           </strong>
         </article>

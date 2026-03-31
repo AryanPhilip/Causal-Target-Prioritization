@@ -29,7 +29,7 @@ export function CopyButton({ text, label, copiedLabel = "Copied to clipboard" }:
     <button
       type="button"
       onClick={copy}
-      className="inline-flex items-center gap-1.5 rounded-full border border-border bg-bg-elevated px-2.5 py-1 text-xs font-medium text-fg shadow-sm transition hover:border-accent hover:text-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring"
+      className="inline-flex items-center gap-1.5 rounded-[var(--radius-lg)] border border-border-strong bg-bg-elevated px-2.5 py-1 text-xs font-semibold uppercase tracking-[0.06em] text-fg shadow-[var(--shadow-tight)] transition-[color,border-color] duration-[420ms] ease-[cubic-bezier(0.22,1,0.36,1)] hover:border-accent hover:text-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring"
     >
       <span aria-hidden className="font-mono text-[0.7rem] opacity-80">
         {status === "idle" ? "⎘" : status === "copied" ? "✓" : "!"}

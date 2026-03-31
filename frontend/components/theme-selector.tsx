@@ -86,7 +86,10 @@ export function ThemeSelector() {
       <span className="text-[0.65rem] font-semibold uppercase tracking-[0.12em] text-fg-subtle">
         Theme
       </span>
-      <div className="inline-flex rounded-full border border-border bg-bg-muted/80 p-0.5 shadow-sm">
+      <div
+        className="inline-flex overflow-hidden border border-border-strong bg-bg-elevated shadow-[var(--shadow-tight)]"
+        role="presentation"
+      >
         {modes.map((m) => (
           <button
             key={m.id}
@@ -95,10 +98,10 @@ export function ThemeSelector() {
             aria-pressed={preference === m.id}
             aria-label={`${m.label} theme. ${m.hint}`}
             onClick={() => apply(m.id)}
-            className={`rounded-full px-2.5 py-1.5 text-xs font-semibold transition sm:px-3 ${
+            className={`border-r border-border last:border-r-0 px-2.5 py-1.5 text-[0.7rem] font-semibold uppercase tracking-[0.08em] transition-[color,background-color] duration-[420ms] ease-[cubic-bezier(0.22,1,0.36,1)] sm:px-3 ${
               preference === m.id
-                ? "bg-bg-elevated text-fg shadow-sm ring-1 ring-border-strong"
-                : "text-fg-muted hover:text-fg"
+                ? "bg-accent-muted text-accent"
+                : "text-fg-muted hover:bg-bg-muted hover:text-fg"
             }`}
           >
             {m.label}

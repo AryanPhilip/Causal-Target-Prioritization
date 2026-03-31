@@ -8,6 +8,13 @@ import { diseaseHref } from "@/lib/urls";
 
 export const dynamic = "force-dynamic";
 
+const sectionNavLink =
+  "border border-border bg-bg-elevated px-3 py-1.5 text-sm font-semibold text-fg-muted shadow-[var(--shadow-tight)] transition-[color,border-color] duration-[420ms] ease-[cubic-bezier(0.22,1,0.36,1)] hover:border-accent hover:text-accent";
+
+const detailCard = "detail-card border border-border-strong bg-bg-elevated p-5 shadow-[var(--shadow-elevated)]";
+
+const listItem = "border border-border bg-bg-muted/60 px-4 py-3 text-sm text-fg";
+
 export default async function TargetDetailPage({
   params,
   searchParams
@@ -42,48 +49,36 @@ export default async function TargetDetailPage({
         aria-label="Page sections"
         className="mb-8 flex flex-wrap gap-2 border-b border-border pb-4 text-sm"
       >
-        <a
-          href="#scores"
-          className="rounded-full border border-border bg-bg-elevated px-3 py-1.5 text-fg-muted transition hover:border-accent hover:text-accent"
-        >
+        <a href="#scores" className={sectionNavLink}>
           Scores
         </a>
-        <a
-          href="#compounds"
-          className="rounded-full border border-border bg-bg-elevated px-3 py-1.5 text-fg-muted transition hover:border-accent hover:text-accent"
-        >
+        <a href="#compounds" className={sectionNavLink}>
           Compounds
         </a>
-        <a
-          href="#trials"
-          className="rounded-full border border-border bg-bg-elevated px-3 py-1.5 text-fg-muted transition hover:border-accent hover:text-accent"
-        >
+        <a href="#trials" className={sectionNavLink}>
           Trials
         </a>
-        <a
-          href="#safety"
-          className="rounded-full border border-border bg-bg-elevated px-3 py-1.5 text-fg-muted transition hover:border-accent hover:text-accent"
-        >
+        <a href="#safety" className={sectionNavLink}>
           Safety
         </a>
       </nav>
 
       <div id="scores" className="mb-8 grid gap-4 scroll-mt-28 md:grid-cols-3">
-        <section className="detail-card rounded-2xl border border-border bg-bg-elevated p-5 shadow-[var(--shadow-elevated)]">
-          <span className="text-xs font-medium uppercase tracking-wide text-fg-muted">Overall score</span>
-          <strong className="mt-2 block font-display text-3xl font-semibold tabular-nums text-fg">
+        <section className={detailCard}>
+          <span className="text-xs font-semibold uppercase tracking-[0.1em] text-fg-muted">Overall score</span>
+          <strong className="mt-2 block font-display text-3xl font-bold tabular-nums text-fg">
             {detail.scorecard.overallScore}
           </strong>
         </section>
-        <section className="detail-card rounded-2xl border border-border bg-bg-elevated p-5 shadow-[var(--shadow-elevated)]">
-          <span className="text-xs font-medium uppercase tracking-wide text-fg-muted">Confidence</span>
-          <strong className="mt-2 block font-display text-3xl font-semibold text-fg">
+        <section className={detailCard}>
+          <span className="text-xs font-semibold uppercase tracking-[0.1em] text-fg-muted">Confidence</span>
+          <strong className="mt-2 block font-display text-3xl font-bold text-fg">
             {detail.scorecard.confidenceLabel}
           </strong>
         </section>
-        <section className="detail-card rounded-2xl border border-border bg-bg-elevated p-5 shadow-[var(--shadow-elevated)]">
-          <span className="text-xs font-medium uppercase tracking-wide text-fg-muted">Percentile</span>
-          <strong className="mt-2 block font-display text-3xl font-semibold tabular-nums text-fg">
+        <section className={detailCard}>
+          <span className="text-xs font-semibold uppercase tracking-[0.1em] text-fg-muted">Percentile</span>
+          <strong className="mt-2 block font-display text-3xl font-bold tabular-nums text-fg">
             {detail.scorecard.percentile}
           </strong>
         </section>
@@ -93,10 +88,7 @@ export default async function TargetDetailPage({
         <Section title="Linked compounds" description="Chemical matter associated with this target in the seeded vertical.">
           <ul className="pill-row grid gap-2 sm:grid-cols-2">
             {detail.linkedCompounds.map((compound) => (
-              <li
-                key={compound.chemblId}
-                className="rounded-2xl border border-border bg-bg-muted/60 px-4 py-3 text-sm text-fg"
-              >
+              <li key={compound.chemblId} className={listItem}>
                 <span className="font-medium">{compound.name}</span>{" "}
                 <small className="font-mono text-fg-muted">({compound.chemblId})</small>
                 <div className="mt-1 text-xs text-fg-muted">Modality: {compound.modality}</div>
@@ -113,10 +105,7 @@ export default async function TargetDetailPage({
         >
           <ul className="link-list grid gap-2">
             {detail.linkedTrials.map((trial) => (
-              <li
-                key={trial.nctId}
-                className="rounded-2xl border border-border bg-bg-muted/60 px-4 py-3 text-sm"
-              >
+              <li key={trial.nctId} className={listItem}>
                 <Link
                   className="font-mono font-semibold text-accent underline-offset-4 hover:underline"
                   href={`https://clinicaltrials.gov/study/${trial.nctId}`}
@@ -139,12 +128,12 @@ export default async function TargetDetailPage({
             {detail.safetySignals.map((signal) => (
               <li
                 key={`${signal.source}-${signal.ingredient}`}
-                className="rounded-2xl border border-border bg-bg-muted/60 px-4 py-3 text-sm text-fg"
+                className={listItem}
               >
                 <strong>{signal.ingredient}</strong>{" "}
                 <span className="text-fg-muted">{signal.detail}</span>
                 {signal.warningFlag ? (
-                  <span className="ml-2 inline-flex rounded-full border border-warn/40 bg-warn/10 px-2 py-0.5 text-xs font-semibold text-warn">
+                  <span className="ml-2 inline-flex border border-warn/40 bg-warn/10 px-2 py-0.5 text-xs font-semibold uppercase tracking-wider text-warn shadow-[var(--shadow-tight)]">
                     Warning
                   </span>
                 ) : null}

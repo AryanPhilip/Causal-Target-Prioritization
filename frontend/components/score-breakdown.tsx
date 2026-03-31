@@ -58,15 +58,15 @@ export function ScoreBreakdown({ components }: ScoreBreakdownProps) {
             <span className="tabular-nums text-fg">{row.display}</span>
           </div>
           <div
-            className="h-2 overflow-hidden rounded-full bg-bg-muted"
+            className="h-1.5 overflow-hidden rounded-[var(--radius-lg)] border border-border bg-bg-muted"
             role="presentation"
             aria-hidden
           >
             <div
               className={
                 row.variant === "risk"
-                  ? "h-full rounded-full bg-gradient-to-r from-danger/90 to-warn/80"
-                  : "h-full rounded-full bg-gradient-to-r from-accent/90 to-accent/50"
+                  ? "h-full bg-gradient-to-r from-danger/90 to-warn/80"
+                  : "h-full bg-gradient-to-r from-accent/90 to-accent/45"
               }
               style={{ width: `${row.pct}%` }}
             />
