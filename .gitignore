@@ -212,6 +212,7 @@ __marimo__/
 # Local worktrees and monorepo artifacts
 .worktrees/
 worktrees/
+.tools/
 frontend/node_modules/
 frontend/.next/
 frontend/test-results/
