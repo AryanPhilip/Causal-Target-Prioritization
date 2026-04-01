@@ -1,0 +1,165 @@
+@import "tailwindcss";
+
+/* Light / dark tokens tuned for readable body copy (AA contrast on surfaces) */
+:root {
+  color-scheme: light;
+  --bg: #f4f6f9;
+  --bg-elevated: #ffffff;
+  --bg-muted: #e8ecf2;
+  --text: #0c1222;
+  --text-muted: #3d4d63;
+  --text-subtle: #5a6b82;
+  --border: rgba(12, 18, 34, 0.12);
+  --border-strong: rgba(12, 18, 34, 0.2);
+  --accent: #0a5c52;
+  --accent-muted: rgba(10, 92, 82, 0.14);
+  --accent-fg: #f4fffc;
+  --warn: #9a3412;
+  --danger: #b91c1c;
+  --ring: rgba(10, 92, 82, 0.55);
+  --shadow: 0 1px 2px rgba(12, 18, 34, 0.07), 0 10px 36px rgba(12, 18, 34, 0.08);
+  --radius-lg: 1.25rem;
+  --radius-pill: 9999px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    color-scheme: dark;
+    --bg: #05080f;
+    --bg-elevated: #0c121c;
+    --bg-muted: #121a28;
+    --text: #f1f5f9;
+    --text-muted: #cbd5e1;
+    --text-subtle: #94a3b8;
+    --border: rgba(148, 163, 184, 0.18);
+    --border-strong: rgba(203, 213, 225, 0.28);
+    --accent: #5eead4;
+    --accent-muted: rgba(94, 234, 212, 0.14);
+    --accent-fg: #022c26;
+    --warn: #fcd34d;
+    --danger: #fca5a5;
+    --ring: rgba(94, 234, 212, 0.55);
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.45), 0 14px 40px rgba(0, 0, 0, 0.4);
+  }
+}
+
+[data-theme="light"] {
+  color-scheme: light;
+  --bg: #f4f6f9;
+  --bg-elevated: #ffffff;
+  --bg-muted: #e8ecf2;
+  --text: #0c1222;
+  --text-muted: #3d4d63;
+  --text-subtle: #5a6b82;
+  --border: rgba(12, 18, 34, 0.12);
+  --border-strong: rgba(12, 18, 34, 0.2);
+  --accent: #0a5c52;
+  --accent-muted: rgba(10, 92, 82, 0.14);
+  --accent-fg: #f4fffc;
+  --warn: #9a3412;
+  --danger: #b91c1c;
+  --ring: rgba(10, 92, 82, 0.55);
+  --shadow: 0 1px 2px rgba(12, 18, 34, 0.07), 0 10px 36px rgba(12, 18, 34, 0.08);
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #05080f;
+  --bg-elevated: #0c121c;
+  --bg-muted: #121a28;
+  --text: #f1f5f9;
+  --text-muted: #cbd5e1;
+  --text-subtle: #94a3b8;
+  --border: rgba(148, 163, 184, 0.18);
+  --border-strong: rgba(203, 213, 225, 0.28);
+  --accent: #5eead4;
+  --accent-muted: rgba(94, 234, 212, 0.14);
+  --accent-fg: #022c26;
+  --warn: #fcd34d;
+  --danger: #fca5a5;
+  --ring: rgba(94, 234, 212, 0.55);
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.45), 0 14px 40px rgba(0, 0, 0, 0.4);
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-bg-elevated: var(--bg-elevated);
+  --color-bg-muted: var(--bg-muted);
+  --color-fg: var(--text);
+  --color-fg-muted: var(--text-muted);
+  --color-fg-subtle: var(--text-subtle);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-accent: var(--accent);
+  --color-accent-muted: var(--accent-muted);
+  --color-accent-fg: var(--accent-fg);
+  --color-warn: var(--warn);
+  --color-danger: var(--danger);
+  --color-ring: var(--ring);
+  --shadow-elevated: var(--shadow);
+  --radius-lg: var(--radius-lg);
+  --font-sans: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-heading), ui-serif, Georgia, "Times New Roman", serif;
+}
+
+/* Optional larger UI text (preferences) */
+html[data-text-scale="large"] {
+  font-size: 106.25%;
+}
+
+html[data-text-scale="larger"] {
+  font-size: 112.5%;
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    color: var(--text);
+    background-color: var(--bg);
+    background-image:
+      radial-gradient(ellipse 120% 80% at 0% -20%, rgba(10, 92, 82, 0.07), transparent 50%),
+      radial-gradient(ellipse 80% 60% at 100% 0%, rgba(12, 18, 34, 0.04), transparent 45%);
+    font-family: var(--font-sans);
+    line-height: 1.55;
+    letter-spacing: 0.01em;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme]) body {
+      background-image:
+        radial-gradient(ellipse 100% 80% at 20% -10%, rgba(94, 234, 212, 0.07), transparent 45%),
+        radial-gradient(ellipse 80% 50% at 100% 10%, rgba(59, 130, 246, 0.05), transparent 40%);
+    }
+  }
+
+  [data-theme="dark"] body {
+    background-image:
+      radial-gradient(ellipse 100% 80% at 20% -10%, rgba(94, 234, 212, 0.07), transparent 45%),
+      radial-gradient(ellipse 80% 50% at 100% 10%, rgba(59, 130, 246, 0.05), transparent 40%);
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}

@@ -1,0 +1,30 @@
+[build-system]
+requires = ["hatchling>=1.27.0"]
+build-backend = "hatchling.build"
+
+[project]
+name = "ctpc-backend"
+version = "0.1.0"
+description = "Backend services for the Causal Target Prioritization Copilot."
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+  "fastapi>=0.135.2,<1.0.0",
+  "httpx>=0.28.1,<1.0.0",
+  "pydantic-settings>=2.11.0,<3.0.0",
+  "psycopg[binary]>=3.2.10,<4.0.0",
+  "sqlalchemy>=2.0.43,<3.0.0",
+  "strawberry-graphql[fastapi]>=0.284.1,<1.0.0",
+  "uvicorn>=0.38.0,<1.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.4.2,<9.0.0",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/ctpc"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
