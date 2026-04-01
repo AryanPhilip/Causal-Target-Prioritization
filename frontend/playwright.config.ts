@@ -10,7 +10,7 @@ export default defineConfig({
   webServer: [
     {
       command:
-        "../.venv/bin/python -m uvicorn ctpc.main:app --app-dir ../backend/src --host 127.0.0.1 --port 8010",
+        "../backend/.venv/bin/python -m uvicorn ctpc.main:app --app-dir ../backend/src --host 127.0.0.1 --port 8010",
       cwd: __dirname,
       url: "http://127.0.0.1:8010/healthz",
       reuseExistingServer: true,
@@ -18,7 +18,7 @@ export default defineConfig({
     },
     {
       command:
-        "PATH=../.tools/node/bin:$PATH CTPC_API_BASE_URL=http://127.0.0.1:8010 ../.tools/node/bin/node ./node_modules/next/dist/bin/next dev --hostname 127.0.0.1 --port 3100",
+        "CTPC_API_BASE_URL=http://127.0.0.1:8010 npx next dev --hostname 127.0.0.1 --port 3100",
       cwd: __dirname,
       url: "http://127.0.0.1:3100",
       reuseExistingServer: true,
