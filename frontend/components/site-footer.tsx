@@ -8,7 +8,7 @@ export function SiteFooter() {
         <kbd className="rounded-[var(--radius-lg)] border border-border-strong bg-bg-muted px-1.5 py-0.5 font-mono text-xs text-fg shadow-[var(--shadow-tight)]">
           ?
         </kbd>{" "}
-        for keyboard shortcuts. Theme and text size use the controls in the header.
+        for keyboard shortcuts. Theme controls are next to Admin in the header.
       </p>
     </footer>
   );

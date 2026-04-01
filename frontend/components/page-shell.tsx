@@ -4,8 +4,7 @@ import { ReactNode } from "react";
 import { Breadcrumbs, type Crumb } from "@/components/breadcrumbs";
 import { CopyButton } from "@/components/copy-button";
 import { SiteFooter } from "@/components/site-footer";
-import { TextScaleSelector } from "@/components/text-scale-selector";
-import { ThemeSelector } from "@/components/theme-selector";
+import { ThemeToggle } from "@/components/theme-selector";
 import { compareHref, diseaseHref } from "@/lib/urls";
 
 export const DEFAULT_DISEASE_ID = "MONDO:0005101";
@@ -33,7 +32,7 @@ export function PageShell({
   copyActions
 }: PageShellProps) {
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="flex min-h-screen flex-col">
       <header className="sticky top-0 z-20 border-b border-border bg-bg/92 backdrop-blur-md">
         <div className="mx-auto flex max-w-6xl flex-col gap-4 px-5 py-4 md:px-8">
           <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
@@ -51,7 +50,7 @@ export function PageShell({
                 Causal target prioritization
               </span>
             </div>
-            <div className="flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-start sm:gap-6">
+            <div className="flex flex-wrap items-center gap-2">
               <nav aria-label="Primary" className="flex flex-wrap gap-1">
                 <Link href="/" className={navLink}>
                   Home
@@ -66,10 +65,7 @@ export function PageShell({
                   Admin
                 </Link>
               </nav>
-              <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:gap-5">
-                <ThemeSelector />
-                <TextScaleSelector />
-              </div>
+              <ThemeToggle />
             </div>
           </div>
         </div>
@@ -79,7 +75,7 @@ export function PageShell({
         {breadcrumbs && breadcrumbs.length > 0 ? <Breadcrumbs items={breadcrumbs} /> : null}
         {contextStrip ? (
           <div className="mb-4 flex flex-wrap items-center gap-2">
-            <p className="font-mono text-xs leading-relaxed text-fg-muted tabular-nums">{contextStrip}</p>
+            <p className="max-w-3xl text-sm leading-relaxed text-fg-muted">{contextStrip}</p>
             {copyActions?.map((action) => (
               <CopyButton key={action.label} label={action.label} text={action.value} />
             ))}

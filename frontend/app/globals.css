@@ -113,14 +113,6 @@
   --font-mono: var(--font-mono), ui-monospace, monospace;
 }
 
-html[data-text-scale="large"] {
-  font-size: 106.25%;
-}
-
-html[data-text-scale="larger"] {
-  font-size: 112.5%;
-}
-
 @layer base {
   * {
     box-sizing: border-box;

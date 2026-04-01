@@ -72,6 +72,14 @@ export async function fetchDiseases(query = "ulcerative"): Promise<DiseaseSummar
   return payload.items;
 }
 
+export async function fetchDiseaseSummary(diseaseId: string): Promise<DiseaseSummary | null> {
+  try {
+    return await readJson<DiseaseSummary>(`/api/v1/diseases/${encodeURIComponent(diseaseId)}`);
+  } catch {
+    return null;
+  }
+}
+
 export async function fetchRankedTargets(
   diseaseId: string,
   profile = "balanced"

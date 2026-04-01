@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import { PageShell } from "@/components/page-shell";
-import { fetchCompareTargets } from "@/lib/api";
+import { fetchCompareTargets, fetchDiseaseSummary } from "@/lib/api";
 import { normalizeIdentifier } from "@/lib/identifiers";
 import { diseaseHref } from "@/lib/urls";
 
@@ -15,7 +15,11 @@ export default async function ComparePage({
   const { diseaseId: rawDiseaseId = "MONDO:0005101", targetIds = "" } = await searchParams;
   const diseaseId = normalizeIdentifier(rawDiseaseId) ?? rawDiseaseId;
   const ids = targetIds.split(",").filter(Boolean);
-  const items = ids.length > 0 ? await fetchCompareTargets(diseaseId, ids) : [];
+  const [items, diseaseMeta] = await Promise.all([
+    ids.length > 0 ? fetchCompareTargets(diseaseId, ids) : Promise.resolve([]),
+    fetchDiseaseSummary(diseaseId)
+  ]);
+  const diseaseLabel = diseaseMeta?.label ?? diseaseId;
 
   return (
     <PageShell
@@ -25,14 +29,14 @@ export default async function ComparePage({
         { label: "Home", href: "/" },
         { label: "Compare" }
       ]}
-      contextStrip={`Disease ${diseaseId}`}
+      contextStrip={`${diseaseLabel} · ${diseaseId}`}
       copyActions={[{ label: "Copy disease ID", value: diseaseId }]}
     >
       {items.length === 0 ? (
         <div className="border border-dashed border-border bg-bg-muted/40 p-8 text-center">
           <p className="text-fg-muted">
             Pick at least one target from the{" "}
-            <Link className="font-semibold text-accent underline-offset-4 hover:underline" href={diseaseHref("MONDO:0005101")}>
+            <Link className="font-semibold text-accent underline-offset-4 hover:underline" href={diseaseHref(diseaseId)}>
               disease workspace
             </Link>
             .

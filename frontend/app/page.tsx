@@ -1,11 +1,9 @@
-import Link from "next/link";
-
 import { MetricStrip } from "@/components/metric-strip";
+import { DiseaseSearch } from "@/components/disease-search";
 import { PageShell } from "@/components/page-shell";
 import { SourceStatusPanel } from "@/components/source-status-panel";
 import { TrustStrip } from "@/components/trust-strip";
 import { fetchDiseases, fetchSourceStatus } from "@/lib/api";
-import { diseaseHref } from "@/lib/urls";
 
 export const dynamic = "force-dynamic";
 
@@ -13,10 +11,8 @@ const DEFAULT_WORKSPACE_DISEASE = "MONDO:0005101";
 
 export default async function HomePage() {
   const [diseases, sourceStatus] = await Promise.all([fetchDiseases(), fetchSourceStatus()]);
-  const workspaceDiseaseId =
-    diseases.find((d) => d.id === DEFAULT_WORKSPACE_DISEASE)?.id ??
-    diseases[0]?.id ??
-    DEFAULT_WORKSPACE_DISEASE;
+  const defaultDisease =
+    diseases.find((d) => d.id === DEFAULT_WORKSPACE_DISEASE) ?? diseases[0];
 
   return (
     <PageShell
@@ -30,36 +26,19 @@ export default async function HomePage() {
             <p className="text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-accent">Query workspace</p>
           </div>
           <h2 className="mt-4 font-display text-2xl font-bold tracking-tight text-fg md:text-3xl">
-            Ulcerative colitis target prioritization
+            Search diseases &amp; open a workspace
           </h2>
           <p className="mt-4 text-sm leading-relaxed text-fg-muted md:text-base">
             Start with a governed shortlist you can defend: association, clinical, chemical, and safety
             signals synthesized into a single transparent score—not a black box.
           </p>
-          <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
-            <label className="sr-only" htmlFor="home-disease-query">
-              Disease focus
-            </label>
-            <input
-              id="home-disease-query"
-              className="min-w-0 flex-1 rounded-[var(--radius-lg)] border border-border-strong bg-bg-muted px-4 py-3 font-mono text-sm text-fg tabular-nums shadow-[var(--shadow-tight)] outline-none ring-ring/0 transition-[border-color,box-shadow] duration-[420ms] ease-[cubic-bezier(0.22,1,0.36,1)] focus:border-accent focus:ring-2 focus:ring-ring"
-              defaultValue="ulcerative colitis"
-              readOnly
-              aria-readonly
-            />
-            <Link
-              className="ds-link-cta ds-link-cta--primary shrink-0 px-6 py-3 text-sm normal-case tracking-normal"
-              href={diseaseHref(workspaceDiseaseId)}
-            >
-              Open workspace
-            </Link>
-          </div>
+          <DiseaseSearch initialItems={diseases} initialQuery="ulcerative" />
         </div>
         <MetricStrip
           stacked
           className="mb-0"
           items={[
-            { label: "Disease scope", value: "1" },
+            { label: "Spotlight disease", value: defaultDisease?.label ?? "—" },
             { label: "Rankable targets", value: "3" },
             { label: "Sources online", value: `${sourceStatus.length}` }
           ]}

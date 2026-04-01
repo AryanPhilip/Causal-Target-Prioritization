@@ -4,7 +4,7 @@ import { HowRankingWorks } from "@/components/how-ranking-works";
 import { MetricStrip } from "@/components/metric-strip";
 import { PageShell } from "@/components/page-shell";
 import { TargetRankingTable } from "@/components/target-ranking-table";
-import { fetchRankedTargets } from "@/lib/api";
+import { fetchDiseaseSummary, fetchRankedTargets } from "@/lib/api";
 import { normalizeIdentifier } from "@/lib/identifiers";
 import { compareHref, diseaseHref } from "@/lib/urls";
 
@@ -17,22 +17,27 @@ export default async function DiseaseWorkspacePage({
 }) {
   const { id: rawId } = await params;
   const id = normalizeIdentifier(rawId) ?? rawId;
-  const rankedTargets = await fetchRankedTargets(id);
+  const [rankedTargets, diseaseMeta] = await Promise.all([
+    fetchRankedTargets(id),
+    fetchDiseaseSummary(id)
+  ]);
+  const diseaseLabel = diseaseMeta?.label ?? id;
 
   return (
     <PageShell
-      title="Disease workspace"
+      title={diseaseLabel}
       eyebrow="Balanced profile with transparent evidence components and safety drag."
       breadcrumbs={[
         { label: "Home", href: "/" },
         { label: "Disease", href: diseaseHref(id) },
-        { label: id }
+        { label: diseaseLabel }
       ]}
-      contextStrip={`Disease ID · ${id}`}
+      contextStrip={`${diseaseLabel} · ${id}`}
       copyActions={[{ label: "Copy disease ID", value: id }]}
     >
       <MetricStrip
         items={[
+          { label: "Disease", value: diseaseLabel },
           { label: "Disease ID", value: id },
           { label: "Top target", value: rankedTargets[0]?.targetSymbol ?? "N/A" },
           { label: "Visible shortlist", value: `${rankedTargets.length}` }

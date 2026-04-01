@@ -39,7 +39,7 @@ export default async function TargetDetailPage({
       title={`${detail.targetSymbol} · target detail`}
       eyebrow={detail.scorecard.explanation.summary}
       breadcrumbs={crumbs}
-      contextStrip={`Target ${id} · Disease ${diseaseId}`}
+      contextStrip={`Target ${id} · ${detail.diseaseName} · ${diseaseId}`}
       copyActions={[
         { label: "Copy target ID", value: id },
         { label: "Copy disease ID", value: diseaseId }

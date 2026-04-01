@@ -48,6 +48,14 @@ def list_diseases(
     return {"items": items}
 
 
+@router.get("/diseases/{disease_id}")
+def get_disease(disease_id: str, db: Session = Depends(get_db)) -> DiseaseSummary:
+    d = db.get(Disease, disease_id)
+    if not d:
+        raise HTTPException(status_code=404, detail="Disease not found")
+    return DiseaseSummary(id=d.id, label=d.label, synonyms=list(d.synonyms or []))
+
+
 @router.get("/diseases/{disease_id}/targets")
 def ranked_targets(
     disease_id: str,
